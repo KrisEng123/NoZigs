@@ -2,18 +2,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			country: [],
+			city: [],
+			base: [],
+			location1: [],
+			location2: [],
+			location3: [],
+			coordinates: [],
+			matrix: [],
+			mapBoxToken: "pk.eyJ1IjoiYmVzbWFycXVlcyIsImEiOiJja3p2cGRucDQwMGliMm9rNnpuOG90MG9nIn0.5n3XuDKIqcxsIDs-1VGs7g",
+			testeVar: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -41,6 +39,41 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			getLocationsFromFrontOffice: (country, city, base, location1, location2, location3) => {
+				const store = getStore();
+
+				setStore({country : country});
+				setStore({city : city});
+				setStore({base : base});
+				setStore({location1 : location1});
+				setStore({location2 : location2});
+				setStore({location3 : location3});
+				
+				
+			},
+			fetchCoordinatesFromMapBox: () => {
+				const store = getStore();
+
+				temp = store.location1;
+
+				store.testeVar = "baguinho"
+
+				//setStore({testeVar : temp});
+				/*var requestOptions = {
+					method: 'GET',
+					redirect: 'follow'
+				  };
+
+				for(let i = 0; i < location.length; i++){
+					fetch("https://api.mapbox.com/geocoding/v5/mapbox.places/" + location[i] + ".json?country=" + country + "&city=" + city + "&access_token=" + mapBoxToken , requestOptions)
+				.then(response => response.json())
+				.then(result => {resultObject.push(result); console.log(resultObject)} )
+				.catch(error => console.log('error', error));
+				}  */
+			},
+			fetchMatrixFromMapBox: () => {
+				const store = getStore();
 			}
 		}
 	};
