@@ -92,7 +92,7 @@ const InputForm = () => {
                     <button className="btn-lg btn-light" >Submit</button>
                 }
 
-                <button className="btn-lg btn-light" onClick={() => actions.fetchCoordinatesFromMapBox}>Get Coordinates</button>
+                <button className="btn-lg btn-light" onClick={() => actions.fetchCoordinatesFromMapBox()}>Get Coordinates</button>
 
             </div>
             {/*

@@ -11,7 +11,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			matrix: [],
 			mapBoxToken: "pk.eyJ1IjoiYmVzbWFycXVlcyIsImEiOiJja3p2cGRucDQwMGliMm9rNnpuOG90MG9nIn0.5n3XuDKIqcxsIDs-1VGs7g",
 			locations: [],
-			resultObject: []
+			resultObject: [],
+			teste: [],
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -21,10 +22,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getMessage: () => {
 				// fetching data from the backend
-				fetch(process.env.BACKEND_URL + "/api/hello")
+				/*fetch(process.env.BACKEND_URL + "/api/hello")
 					.then(resp => resp.json())
 					.then(data => setStore({ message: data.message }))
-					.catch(error => console.log("Error loading message from backend", error));
+					.catch(error => console.log("Error loading message from backend", error));*/
 			},
 			changeColor: (index, color) => {
 				//get the store
@@ -71,20 +72,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				let temp = [];
 
+				let country = store.country.replace(/ /g , "%20");
+				let city = store.city.replace(/ /g , "%20");
+
+				let locations = store.locations;
+
+				/*for(let i = 0; i < locations.length; i++){
+					locations[i] = locations[i].replace(/ /g , "%20");
+				}*/
+
 				var requestOptions = {
 					method: 'GET',
 					redirect: 'follow'
 				  };
 
 				for(let i = 0; i < store.locations.length; i++){
-					fetch("https://api.mapbox.com/geocoding/v5/mapbox.places/" + store.locations[i] + ".json?country=" + store.country + "&city=" + store.city + "&access_token=" + store.mapBoxToken , requestOptions)
+					fetch("https://api.mapbox.com/geocoding/v5/mapbox.places/" + locations[i] + ".json?country=" + country + "&city=" + city + "&limit=1&access_token=" + store.mapBoxToken , requestOptions)
 				.then(response => response.json())
-				.then(result => {temp.push(result);console.log("temp", temp)} )
+				.then(result => temp.push(result))
 				.catch(error => console.log('error', error));
 				} 
 				
+				//console.log("store.locations", store.locations);
 				setStore({resultObject : temp});
-				console.log("store", store.resultObject)
+				console.log("store", store.resultObject);
+
+				store.teste = "working";
+
 
 			},
 			fetchMatrixFromMapBox: () => {
