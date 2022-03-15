@@ -12,6 +12,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			mapBoxToken: "pk.eyJ1IjoiYmVzbWFycXVlcyIsImEiOiJja3p2cGRucDQwMGliMm9rNnpuOG90MG9nIn0.5n3XuDKIqcxsIDs-1VGs7g",
 			locations: [],
 			resultObject: [],
+			dataForMatrixFetch: [],
 			teste: [],
 		},
 		actions: {
@@ -96,6 +97,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//console.log("store.locations", store.locations);
 				setStore({resultObject : temp});
 				console.log("store", store.resultObject);
+
+				let tempObj = []
+
+				for(let i = 0; i < store.resultObject.length; i++){
+					let temp = {"Location" : store.resultObject[i].features[0].text,
+					"Coordinates" : store.resultObject[i].features[0].geometry.coordinates};
+					tempObj.push(temp);	
+				}
+				setStore({dataForMatrixFetch : tempObj});
+				console.log("dataformatrix", store.dataForMatrixFetch);
 
 				store.teste = "working";
 

@@ -12,6 +12,8 @@ import { Footer } from "./component/footer";
 
 import FetchTest from "./pages/test.js";
 
+import FetchData from "./component/fetchData.jsx";
+
 //create your first component
 const Layout = () => {
 	//the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -23,6 +25,7 @@ const Layout = () => {
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
 					<Navbar />
+					<FetchData />
 					<Switch>
 						<Route exact path="/">
 							<Home />

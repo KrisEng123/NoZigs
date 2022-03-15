@@ -10,22 +10,22 @@ const FetchData = () => {
 
     useEffect(() => {
         setResult(store.resultObject);
-        console.log("useEffect", store.resultObject);
-    },[store]); 
+        //console.log("useEffect", store.resultObject);
+    }); 
     
-    console.log("component", store.resultObject);
+    //console.log("component", store.resultObject);
 
-    console.log("const", result);
+    //console.log("const", result);
 
     return (
         <>
             <h1>__YEAHHHH BABY</h1>
             <p>{store.teste}</p>
             <p>
-                {store.resultObject.length}
-            {result.length}
+                {store.resultObject != "" ? store.resultObject[0].features[0].text : "empty"}
+                {store.resultObject != "" ? store.resultObject[0].features[0].geometry.coordinates : "empty"}
+                {/*result!= "" ? result[0].features[0].text : "empty"*/}
             </p>
-            
             
 
             

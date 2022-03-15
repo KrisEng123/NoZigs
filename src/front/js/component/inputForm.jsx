@@ -86,7 +86,7 @@ const InputForm = () => {
 				</>
 			))}
                 </form>
-                {name != "" && country != "" && city != "" && base != "" && locationsInput != "" ? 
+                {/*name != "" &&*/ country != "" && city != "" && base != "" && locationsInput != "" ? 
                     <button className="btn-lg btn-success" onClick={() => actions.getLocationsFromFrontOffice(name,country,city,base,locationsInput)}>Submit</button>
                     : 
                     <button className="btn-lg btn-light" >Submit</button>
