@@ -94,6 +94,10 @@ const InputForm = () => {
 
                 <button className="btn-lg btn-light" onClick={() => actions.fetchCoordinatesFromMapBox()}>Get Coordinates</button>
 
+                <button className="btn-lg btn-light" onClick={() => actions.createObject()}>Create Object</button>
+
+                <button className="btn-lg btn-light" onClick={() => actions.fetchMatrixFromMapBox()}>Fetch Matrix</button>
+
             </div>
             {/*
                 <div className="col-4">

@@ -98,22 +98,59 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({resultObject : temp});
 				console.log("store", store.resultObject);
 
-				let tempObj = []
-
-				for(let i = 0; i < store.resultObject.length; i++){
-					let temp = {"Location" : store.resultObject[i].features[0].text,
-					"Coordinates" : store.resultObject[i].features[0].geometry.coordinates};
-					tempObj.push(temp);	
-				}
-				setStore({dataForMatrixFetch : tempObj});
-				console.log("dataformatrix", store.dataForMatrixFetch);
+				
 
 				store.teste = "working";
 
 
 			},
+			createObject: () => {
+				const store = getStore();
+
+				let tempObj = []
+
+				for(let i = 0; i < store.resultObject.length; i++){
+					let temp = {"index" : i ,"Location" : store.resultObject[i].features[0].text,
+					"Coordinates" : store.resultObject[i].features[0].geometry.coordinates};
+					tempObj.push(temp);	
+				}
+				setStore({dataForMatrixFetch : tempObj});
+				console.log("dataformatrix", store.dataForMatrixFetch);
+			},
 			fetchMatrixFromMapBox: () => {
 				const store = getStore();
+
+				let varForMatrix = [];
+
+				for(let i = 0; i < store.dataForMatrixFetch.length; i++){
+					varForMatrix.push(store.dataForMatrixFetch[i].Coordinates);
+				}
+
+				console.log("object with data",varForMatrix);
+
+				let varForMatrixString = "";
+
+				varForMatrixString = varForMatrix.join(";");
+				
+				console.log("string for fetch",varForMatrixString);
+
+				let matrix = [];
+
+				var requestOptions = {
+					method: 'GET',
+					redirect: 'follow'
+				  };
+
+				
+				fetch("https://api.mapbox.com/optimized-trips/v1/mapbox/walking/" + varForMatrixString + "?access_token=" + store.mapBoxToken , requestOptions)
+				.then(response => response.json())
+				.then(result => matrix.push(result))
+				.catch(error => console.log('error', error));
+				
+				
+				console.log("matrixFetched", matrix);
+				
+
 			},
 			removeItem: (i) => {
 				const store = getStore();
