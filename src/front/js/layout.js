@@ -12,7 +12,7 @@ import { Footer } from "./component/footer";
 
 import FetchTest from "./pages/test.js";
 
-import FetchData from "./component/fetchData.jsx";
+
 
 //create your first component
 const Layout = () => {
@@ -25,7 +25,6 @@ const Layout = () => {
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
 					<Navbar />
-					<FetchData />
 					<Switch>
 						<Route exact path="/">
 							<Home />

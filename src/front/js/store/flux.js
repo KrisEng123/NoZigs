@@ -13,6 +13,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			locations: [],
 			resultObject: [],
 			dataForMatrixFetch: [],
+			tempRoute:[],
+			bestRoute:[],
 			teste: [],
 		},
 		actions: {
@@ -88,7 +90,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  };
 
 				for(let i = 0; i < store.locations.length; i++){
-					fetch("https://api.mapbox.com/geocoding/v5/mapbox.places/" + locations[i] + ".json?country=" + country + "&city=" + city + "&limit=1&access_token=" + store.mapBoxToken , requestOptions)
+					fetch("https://api.mapbox.com/geocoding/v5/mapbox.places/" + locations[i] + ".json?country=" + country + "&city=" + city + "&limit=1&types=place%2Cpostcode%2Caddress%2Cpoi&access_token=" + store.mapBoxToken , requestOptions)
 				.then(response => response.json())
 				.then(result => temp.push(result))
 				.catch(error => console.log('error', error));
@@ -147,10 +149,39 @@ const getState = ({ getStore, getActions, setStore }) => {
 				.then(result => matrix.push(result))
 				.catch(error => console.log('error', error));
 				
-				
+				setStore({matrix : matrix});
 				console.log("matrixFetched", matrix);
+
+				
 				
 
+			},
+			getBestRoute: () => {
+				const store = getStore();
+
+				let tempRoute = [];
+
+				for(let i = 0; i < store.matrix.length; i++){
+					for(let z = 0; z < store.matrix[i].waypoints.length; z++){
+						tempRoute.push(store.matrix[i].waypoints[z].waypoint_index);
+						console.log(tempRoute);
+					}
+				}
+
+				setStore({tempRoute : tempRoute});
+				console.log("storeMatrix", tempRoute);
+			},
+			showBestRoute: () => {
+				const store = getStore()
+
+				let temp = [];
+
+				for(let i = 0;i < store.tempRoute.length; i++){
+					temp.push(store.locations[store.tempRoute[i]])
+				}
+
+				console.log("temp",temp);
+				setStore({bestRoute : temp});
 			},
 			removeItem: (i) => {
 				const store = getStore();

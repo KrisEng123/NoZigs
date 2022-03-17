@@ -39,7 +39,7 @@ const InputForm = () => {
 
     return(
         <> 
-            <div className="col-4">
+            <div className="col-5">
                 <form onSubmit={handleSubmit} className="mt-2 mb-2 justify-content-between">
                     <div className="col-12">
                         <input type="text" id="name" className="form-control" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} ></input>
@@ -97,6 +97,10 @@ const InputForm = () => {
                 <button className="btn-lg btn-light" onClick={() => actions.createObject()}>Create Object</button>
 
                 <button className="btn-lg btn-light" onClick={() => actions.fetchMatrixFromMapBox()}>Fetch Matrix</button>
+
+                <button className="btn-lg btn-light" onClick={() => actions.getBestRoute()}>Get BestRoute</button>
+
+                <button className="btn-lg btn-light" onClick={() => actions.showBestRoute()}>Show BestRoute</button>
 
             </div>
             {/*

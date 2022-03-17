@@ -2,17 +2,16 @@ import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 
-const InputData = () => {
-
+const BestRoute = () => {
     const { store, actions } = useContext(Context);
 
     return (
         <>
             
-            {<div className="col-6">
-                <h1>On store file</h1>
+            {<div className="col-12">
+                <h1>Best Route</h1>
                 {store.name != "" ? <h2> Your trip "{store.name}" to {store.city},{store.country}</h2>: ""}
-                {store.locations.map((listEntry, i) => (
+                {store.bestRoute.map((listEntry, i) => (
                     <>
 					<div className="d-flex justify-content-between mt-2 mb-2 ">
 						<div
@@ -45,4 +44,4 @@ const InputData = () => {
     )
 }
 
-export default InputData;
+export default BestRoute
