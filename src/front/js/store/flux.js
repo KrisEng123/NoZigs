@@ -90,7 +90,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  };
 
 				for(let i = 0; i < store.locations.length; i++){
-					fetch("https://api.mapbox.com/geocoding/v5/mapbox.places/" + locations[i] + ".json?country=" + country + "&city=" + city + "&limit=1&types=place%2Cpostcode%2Caddress%2Cpoi&access_token=" + store.mapBoxToken , requestOptions)
+					fetch("https://api.mapbox.com/geocoding/v5/mapbox.places/" + locations[i] + " " + city + ".json?country=" + country + "&limit=1&types=place%2Cpostcode%2Caddress%2Cpoi&access_token=" + store.mapBoxToken , requestOptions)
 				.then(response => response.json())
 				.then(result => temp.push(result))
 				.catch(error => console.log('error', error));

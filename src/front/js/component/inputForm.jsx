@@ -3,10 +3,6 @@ import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 
 
-function getFromMapBox () {
-
-}
-
 const InputForm = () => {
 
     const [name, setName] = useState("");
